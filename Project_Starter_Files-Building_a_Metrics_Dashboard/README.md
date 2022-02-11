@@ -42,8 +42,6 @@ Example SLO: *Average Monthly Request Response Time of < 250ms*
 
 ## Tracing our Flask App
 
-*TODO:*  We will create a Jaeger span to measure the processes on the backend. Once you fill in the span, provide a screenshot of it here. Also provide a (screenshot) sample Python file containing a trace and span code used to perform Jaeger traces on the backend service.
-
 <img src="./answer-img/jaeger_traces.png" style="border: 2px solid #888888" width="550px"/>
 
 **Python Trace Example**
@@ -102,8 +100,6 @@ def homepage():
 
 ## Report Error
 
-*TODO:* Using the template below, write a trouble ticket for the developers, to explain the errors that you are seeing (400, 500, latency) and to let them know the file that is causing the issue also include a screenshot of the tracer span to demonstrate how we can user a tracer to locate errors easily.
-
 ```markdown
 # TROUBLE TICKET
 
@@ -125,8 +121,6 @@ take a look at this when you get a minute?  Thanks!
 <img src="./answer-img/backend_error.png" style="border: 2px solid #888888" width="550px"/>
 
 ## Creating SLIs and SLOs
-
-*TODO:* We want to create an SLO guaranteeing that our application has a 99.95% uptime per month. Name four SLIs that you would use to measure the success of this SLO.
 
 SLO: 99.95% Uptime per month
 
