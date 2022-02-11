@@ -17,9 +17,7 @@ FlaskInstrumentor().instrument_app(app)
 RequestsInstrumentor().instrument()
 
 metrics = PrometheusMetrics(app)
-# static information as metric
-metrics.info("app_info", "Application info", version="1.0.3")
-
+metrics.info("appInfo", "Trial App", version="0.0.1")
 logging.getLogger("").handlers = []
 logging.basicConfig(format="%(message)s", level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -47,11 +45,13 @@ flask_tracer = FlaskTracing(tracer, True, app)
 
 
 @app.route("/")
+@tracing.trace()
 def homepage():
     return render_template("main.html")
 
 
 @app.route("/trace")
+@tracing.trace()
 def trace():
     def remove_tags(text):
         tag = re.compile(r"<[^>]+>")

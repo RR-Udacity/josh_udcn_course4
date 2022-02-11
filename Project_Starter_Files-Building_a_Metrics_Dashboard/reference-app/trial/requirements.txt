@@ -11,3 +11,4 @@ opentelemetry-sdk==0.12b0
 prometheus-flask-exporter==0.18.1
 pylint==2.4.0
 requests==2.23.0
+flask-opentracing==1.1.0

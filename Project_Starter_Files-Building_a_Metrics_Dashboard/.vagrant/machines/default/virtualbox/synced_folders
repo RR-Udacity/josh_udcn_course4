@@ -1,0 +1,1 @@
+{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"/home/josh/git/udcn_course4/Project_Starter_Files-Building_a_Metrics_Dashboard","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}
