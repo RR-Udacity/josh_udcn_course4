@@ -24,7 +24,7 @@ spec:
       - env:
         - name: JAEGER_HOST
           value: my-traces-agent.observability.svc.cluster.local
-        image: ghcr.io/thejaysmith/trial:v1
+        image: jdhaines/ud4-trial:latest
         imagePullPolicy: Always
         name: trial
         ports:

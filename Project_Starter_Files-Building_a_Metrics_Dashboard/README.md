@@ -28,12 +28,14 @@ Example SLO: *Average Monthly Request Response Time of < 250ms*
 
 ## Creating SLI metrics
 
+> In the first review, the reviewer (and the rubric) said these should be KPIs, even though the README template says these should be SLIs.  Not having the README connected to the rubric meant the project review will almost never go well.
+
 |Metric|Description|
 |---|---|
 |Frontend Uptime|Running total of uptime for our Frontend Service for the current month|
 |Backend Uptime|Running total of uptime for our Backend Service for the current month|
-|Frontend Error Rate|Percentage of Frontend requests that have an error (40x & 50x)|
-|Backend Error Rate|Percentage of Backend requests that have an error (40x & 50x)|
+|Frontend Failing Requests by type|Number of Frontend requests that have an error (40x & 50x)|
+|Backend Failing Requests by type|Percentage of Backend requests that have an error (40x & 50x)|
 |Total Errors|Total combined errors between the frontend and backend service|
 
 ## Create a Dashboard to measure our SLIs
@@ -42,7 +44,7 @@ Example SLO: *Average Monthly Request Response Time of < 250ms*
 
 ## Tracing our Flask App
 
-<img src="./answer-img/jaeger_traces.png" style="border: 2px solid #888888" width="550px"/>
+<img src="./answer-img/jaeger-ui.png" style="border: 2px solid #888888" width="650px"/>
 
 **Python Trace Example**
 
@@ -96,7 +98,7 @@ def homepage():
 
 ## Jaeger in Dashboards
 
-<img src="./answer-img/jaeger_traces.png" style="border: 2px solid #888888" width="550px"/>
+<img src="./answer-img/jaeger-data-source.png" style="border: 2px solid #888888" width="550px"/>
 
 ## Report Error
 
@@ -107,39 +109,55 @@ Name: Josh Haines
 
 Date: 11Feb2022
 
-Subject: Strange 40x error on UdaConnect App
+Subject: Strange 503 error on UdaConnect `Trial` Service
 
-Affected Area: Backend
+Affected Area: `/trace` endpoint
 
 Severity: Medium
 
-Description: We're watching the dashboard carefully and noticing an increasing number of 40x
-(primarily 404) errors on the backend service for our UdaConnect app. Could your SRE team
-take a look at this when you get a minute?  Thanks!
+Description: We're watching the dashboard carefully and noticing a sporadic error in the
+ `trial` service.  You can see an example with the span ID `8e2db9bd4a0dee06`. Thanks!
 ```
 
-<img src="./answer-img/backend_error.png" style="border: 2px solid #888888" width="550px"/>
+<img src="./answer-img/trace.png" style="border: 2px solid #888888" width="550px"/>
 
 ## Creating SLIs and SLOs
 
+>Note: The Readme doesn't ask for 4 SLOs, just 1 SLO which is provided, then asks us to create 4 SLIs based on it.  There is nothing in the class, nor in the rubric, nor in the Readme about `golden signals`.  Please don't make up tasks and expect them to be in the project...we can't read the mind of each reviewer.  The task in the original readme reads: `We want to create an SLO guaranteeing that our application has a 99.95% uptime per month. Name four SLIs that you would use to measure the success of this SLO.`
+
 SLO: 99.95% Uptime per month
 
-- Average CPU usage should be less than 75% throughout the month.
-- Maximum CPU usage should be less than 90% throughout the month.
-- Latency should remain below 400ms for all requests throughout the month.
-- Bandwith should remain below 70% saturation throughout the month
+- Latency - overall response time, usually in ms
+- Error Rates - Total requests and error requests
+- Rates - Total requests, often in req/sec
+- Utilization or Consumption (resource usage - CPU, Memory, etc.)
 
 ## Building KPIs for our plan
 
 By mixing our SLIs, SLOs, and metrics which are capable of being displayed, I feel the following list of dashboard items will be the most useful in helping us to manage these applications.
 
-- Average CPU Usage by Pod
-- Average Throughput by Namespace
-- Average Bandwidth by Namespace (Transmitted & Received)
-- Backend & Frontend Uptime
-- Backend & Frontend HTTP Requests (Total & Errors)
-- Total Traces by Service (Frontend & Backend)
+- Latency
+  - Avg Response Frontend
+  - Avg Response Backend
+- Error Rates
+  - Backend Error Requests
+  - Frontend Error Requests
+- Rates
+  - Backend Total Requests
+  - Frontend Total Requests
+- Utilization
+  - CPU Usage
+  - Bandwidth Transmitted & Received by Container
 
 ## Final Dashboard
+
+Dashboard Description:
+
+- Avg Response times of the frontend and backend services to see how the overall speed is doing
+- Total number of errored requests as a quick gauge chart
+- Total Backend Requests (green line) compared to number of error requests
+- Total Frontend Requests (green line) compared to number of error requests
+- CPU Usage across the cluster
+- Container Transmitted & Received Bandwidth
 
 <img src="./answer-img/final.png" style="border: 2px solid #888888" width="850px"/>
